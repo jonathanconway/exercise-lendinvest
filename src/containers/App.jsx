@@ -1,5 +1,5 @@
 import React from 'react'
 
 export default class App extends React.Component {
-  render = () => <div></div>
+  render = () => <div className="app"></div>
 }
