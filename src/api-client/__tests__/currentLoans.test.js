@@ -3,10 +3,12 @@ import { get } from '../currentLoans'
 jest.mock('../../../data/current-loans.json', () => ({
   loans: [
     {
-      "title": "Voluptate et sed tempora qui quisquam."
+      "title": "Voluptate et sed tempora qui quisquam.",
+      "amount": "85,754"
     },
     {
-      "title": "Consectetur ipsam qui magnam minus dolore ut fugit."
+      "title": "Consectetur ipsam qui magnam minus dolore ut fugit.",
+      "amount": "75,754"
     }
   ]
 }))
@@ -16,5 +18,11 @@ describe('currentLoans', () => {
     const loans = get()
     expect(loans[0].title).toEqual('Voluptate et sed tempora qui quisquam.')
     expect(loans[1].title).toEqual('Consectetur ipsam qui magnam minus dolore ut fugit.')
+  })
+
+  it('parses comma-formatted numbers into number-typed values', () => {
+    const loans = get()
+    expect(loans[0].amount).toEqual(85754)
+    expect(loans[1].amount).toEqual(75754)
   })
 })
