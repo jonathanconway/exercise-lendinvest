@@ -25,3 +25,7 @@ npm start
 ```bash
 npm test
 ```
+
+## Assumptions
+
+* `term_remaining` values are in seconds
