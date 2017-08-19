@@ -1,10 +1,38 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import moment from 'moment'
+
 export default class Loan extends React.Component {
   static propTypes = {
     loan: PropTypes.object.isRequired
   };
+
+  pluralise = (word, number) =>
+    word + (number > 1 ? 's' : '')
+
+  formatTermRemaining = termRemainingInSeconds => {
+      const durationRemaining = moment.duration(termRemainingInSeconds * 1000)
+      const days = durationRemaining.days()
+      const months = durationRemaining.months()
+      const durationParts = []
+
+      if (months) {
+        durationParts.push(months)
+        durationParts.push(' ' + this.pluralise('month', months))
+      }
+
+      if (months && days) {
+        durationParts.push(', ')
+      }
+      
+      if (days) {
+        durationParts.push(days)
+        durationParts.push(' ' + this.pluralise('day', days))
+      }
+
+      return durationParts.join('')
+    }
 
   render = () => <div>
     <h2 data-test="title">{this.props.loan.title}</h2>
