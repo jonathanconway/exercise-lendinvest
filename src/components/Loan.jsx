@@ -5,7 +5,8 @@ import moment from 'moment'
 
 export default class Loan extends React.Component {
   static propTypes = {
-    loan: PropTypes.object.isRequired
+    loan: PropTypes.object.isRequired,
+    onClickInvest: PropTypes.func
   };
 
   pluralise = (word, number) =>
@@ -56,5 +57,7 @@ export default class Loan extends React.Component {
       <dt>amount</dt>
       <dd data-test="amount">£{this.props.loan.amount.toLocaleString()}</dd>
     </dl>
+
+    <button data-test="invest" onClick={this.props.onClickInvest}>Invest in Loan</button>
   </div>
 }
