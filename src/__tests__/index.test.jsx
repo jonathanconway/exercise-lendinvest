@@ -7,6 +7,6 @@ describe('index', () => {
 
   it('renders app div to the container', () => {
     expect(document.body.children[0].children[0].tagName).toEqual('DIV')
-    expect(document.body.children[0].children[0].className).toEqual('app')
+    expect(document.body.children[0].children[0].attributes.getNamedItem('data-test').value).toEqual('app')
   })
 })
