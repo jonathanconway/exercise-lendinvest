@@ -44,6 +44,7 @@ describe('<Loan />', () => {
     it('triggers onClickInvest handler when clicked, passing loan id', () => {
       const mockHandleClickInvest = jest.fn()
       const wrapper = mount(<Loan loan={fakeLoan} onClickInvest={mockHandleClickInvest} />)
+      expect(mockHandleClickInvest).not.toHaveBeenCalled()
       wrapper.find('button[data-test="invest"]').simulate('click')
       expect(mockHandleClickInvest).toHaveBeenCalledWith('1')
     })
