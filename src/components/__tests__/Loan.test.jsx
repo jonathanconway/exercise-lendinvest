@@ -10,6 +10,7 @@ jest.mock('../formatters', () => ({
 describe('<Loan />', () => {
 
   let fakeLoan = {
+    id: '1',
     title: 'title',
     tranche: 'A',
     available: 1123,
@@ -21,7 +22,7 @@ describe('<Loan />', () => {
 
   describe('loan details', () => {
     it('renders title, tranche and monetary figures, properly formatted', () => {
-      const wrapper = shallow(<Loan loan={fakeLoan} />)
+      const wrapper = shallow(<Loan loan={fakeLoan} onClickInvest={() => {}} />)
       expect(wrapper.find('[data-test="title"]').text()).toMatch(fakeLoan.title)
       expect(wrapper.find('[data-test="tranche"]').text()).toMatch(fakeLoan.tranche.toString())
       expect(wrapper.find('[data-test="available"]').text()).toMatch('£1,123')
@@ -34,17 +35,17 @@ describe('<Loan />', () => {
 
   describe('invest button', () => {
     it('renders with text', () => {
-      const wrapper = shallow(<Loan loan={fakeLoan} />)
+      const wrapper = shallow(<Loan loan={fakeLoan} onClickInvest={() => {}} />)
       const button = wrapper.find('button[data-test="invest"]')
       expect(button.length).toEqual(1)
       expect(button.text().length).toBeGreaterThan(5)
     })
 
-    it('triggers onClickInvest handler when clicked', () => {
+    it('triggers onClickInvest handler when clicked, passing loan id', () => {
       const mockHandleClickInvest = jest.fn()
       const wrapper = mount(<Loan loan={fakeLoan} onClickInvest={mockHandleClickInvest} />)
       wrapper.find('button[data-test="invest"]').simulate('click')
-      expect(mockHandleClickInvest).toHaveBeenCalled()
+      expect(mockHandleClickInvest).toHaveBeenCalledWith('1')
     })
   })
 

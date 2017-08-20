@@ -6,9 +6,8 @@ import { formatTermRemaining } from './formatters'
 export default class Loan extends React.Component {
   static propTypes = {
     loan: PropTypes.object.isRequired,
-    onClickInvest: PropTypes.func
+    onClickInvest: PropTypes.func.isRequired
   }
-
 
   render = () => <div>
     <h2 data-test="title">{this.props.loan.title}</h2>
@@ -33,6 +32,6 @@ export default class Loan extends React.Component {
       <dd data-test="amount">£{this.props.loan.amount.toLocaleString()}</dd>
     </dl>
 
-    <button data-test="invest" onClick={this.props.onClickInvest}>Invest in Loan</button>
+    <button data-test="invest" onClick={this.props.onClickInvest(this.props.loan.id)}>Invest in Loan</button>
   </div>
 }

@@ -8,7 +8,7 @@ export default class App extends React.Component {
   render = () => <div data-test="app">
     {
       loans.map((loan, index) =>
-        <Loan key={index} loan={loan} />
+        <Loan key={index} loan={loan} onClickInvest={() => {}} />
       )
     }
     <TotalAvailable loans={loans} />
