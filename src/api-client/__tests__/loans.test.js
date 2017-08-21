@@ -1,4 +1,4 @@
-import { loans } from '../loans'
+import { loans, investInLoan } from '../loans'
 
 jest.mock('../../../data/current-loans.json', () => ({
   loans: [{
@@ -23,7 +23,7 @@ jest.mock('../../../data/current-loans.json', () => ({
   }]
 }))
 
-describe('currentLoans', () => {
+describe('loans', () => {
   it('fetches loans from the data source', () => {
     expect(loans[0].title).toEqual('Voluptate et sed tempora qui quisquam.')
     expect(loans[1].title).toEqual('Consectetur ipsam qui magnam minus dolore ut fugit.')
@@ -41,5 +41,18 @@ describe('currentLoans', () => {
     expect(loans[1].term_remaining).toEqual(1620000)
     expect(loans[1].ltv).toEqual(48.79)
     expect(loans[1].amount).toEqual(75754)
+  })
+})
+
+describe('investInLoan', () => {
+  it('reduces the loan available amount, by the specified amount, on the specified loan (looked up by loan id)', () => {
+    expect(loans[0].available).toEqual(11959)
+    investInLoan('1', 1000)
+    expect(loans[0].available).toEqual(10959)
+  })
+
+  it('throws developer-friendly exception if specific loan id not found', () => {
+    expect(() => investInLoan('100', 1000)).toThrow(RangeError)
+    expect(() => investInLoan('1', 1000)).not.toThrow()
   })
 })

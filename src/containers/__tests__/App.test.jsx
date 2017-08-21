@@ -3,6 +3,7 @@ import { shallow, mount } from 'enzyme'
 
 import App from '../App'
 
+import { investInLoan } from '../../api-client/loans'
 jest.mock('../../api-client/loans', () => ({
   loans: [{
       "id": "1",
@@ -23,7 +24,8 @@ jest.mock('../../api-client/loans', () => ({
       "term_remaining": "1620000",
       "ltv": "48.80",
       "amount": "85,754"
-    }]
+    }],
+  investInLoan: jest.fn()
 }))
 
 describe('<App />', () => {
@@ -45,5 +47,13 @@ describe('<App />', () => {
     wrapper.find('Loan button').at(1).simulate('click', '1')
     expect(wrapper.find('InvestDialog').length).toEqual(1)
     expect(wrapper.find('InvestDialog').prop('loan')).toEqual(expect.objectContaining({ id: '5' }))
+  })
+
+  it('calls api to invest loan amount and close invest dialog when user submits an investment amount', () => {
+    const wrapper = mount(<App />)
+    wrapper.find('Loan button').at(1).simulate('click', '1')
+    wrapper.find('InvestDialog').props().onSubmitInvestmentAmount(123)
+    expect(investInLoan).toHaveBeenCalled()
+    expect(wrapper.find('InvestDialog')).toHaveLength(0)
   })
 })

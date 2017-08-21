@@ -12,10 +12,14 @@ const parseFigures = loan =>
     ltv: parseFigure(loan.ltv)
   })
 
-const investInLoan = (loanId, amount) => {}
-
 const loans = _loans.map(parseFigures)
 
-export { investInLoan, loans }
+const investInLoan = (loanId, amount) => {
+  const loan = loans.filter(loan => loan.id === loanId)[0]
+  if (!loan) {
+    throw new RangeError('Loan with specified id could not be found')
+  }
+  loans[loans.indexOf(loan)].available = loan.available - amount
+}
 
-export default { investInLoan, loans }
+export { investInLoan, loans }

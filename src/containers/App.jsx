@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { loans } from '../api-client/loans'
+import { loans, investInLoan } from '../api-client/loans'
 import Loan from '../components/Loan'
 import TotalAvailable from '../components/TotalAvailable'
 import InvestDialog from '../components/InvestDialog'
@@ -13,8 +13,13 @@ export default class App extends React.Component {
 
   handleLoanClickInvest = loanId =>
     this.setState({
-      investInLoan: loans.filter(loan => loan.id === loanId)[0]
+      investDialogLoan: loans.filter(loan => loan.id === loanId)[0]
     })
+
+  handleSubmitInvestmentAmount = amount =>{
+    investInLoan(this.state.investDialogLoan.id, amount)
+    this.setState({ investDialogLoan: null })
+  }
 
   render = () => <div data-test="app">
     {
@@ -24,6 +29,8 @@ export default class App extends React.Component {
     }
     <TotalAvailable loans={loans} />
 
-    {this.state.investInLoan ? <InvestDialog loan={this.state.investInLoan} /> : null}
+    {this.state.investDialogLoan
+      ? <InvestDialog loan={this.state.investDialogLoan} onSubmitInvestmentAmount={this.handleSubmitInvestmentAmount} />
+      : null}
   </div>
 }
