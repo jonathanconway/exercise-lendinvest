@@ -19,7 +19,10 @@ const investInLoan = (loanId, amount) => {
   if (!loan) {
     throw new RangeError('Loan with specified id could not be found')
   }
-  loans[loans.indexOf(loan)].available = loan.available - amount
+  Object.assign(loans[loans.indexOf(loan)], {
+    available: loan.available - amount,
+    isInvested: true
+  })
 }
 
 export { investInLoan, loans }

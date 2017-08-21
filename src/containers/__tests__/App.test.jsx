@@ -51,7 +51,9 @@ describe('<App />', () => {
     expect(wrapper.find('InvestDialog').prop('loan')).toEqual(expect.objectContaining({ id: '5' }))
   })
 
-  it('calls api to invest loan amount and close invest dialog when user submits an investment amount', () => {
+  it(`handles user submitting an investment amount by:
+      - calling api to invest loan amount
+      - closing invest dialog`, () => {
     const wrapper = mount(<App />)
     wrapper.find('Loan button').at(1).simulate('click', '1')
     wrapper.find('InvestDialog').props().onSubmitInvestmentAmount(123)

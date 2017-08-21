@@ -35,6 +35,13 @@ const Section = styled.section`
       box-sizing: border-box;
     }
   `
+    const Status = styled.span`
+      color: green;
+      height: 2rem;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+      text-align: right;
+    `
 
 export default class Loan extends React.Component {
   static propTypes = {
@@ -68,6 +75,7 @@ export default class Loan extends React.Component {
     </Details>
 
     <ActionsAndStatus>
+      <Status data-test="status">{this.props.loan.isInvested ? 'Invested' : null}</Status>
       <Button data-test="invest" onClick={() => this.props.onClickInvest(this.props.loan.id)}>Invest in Loan</Button>
     </ActionsAndStatus>
   </Section>

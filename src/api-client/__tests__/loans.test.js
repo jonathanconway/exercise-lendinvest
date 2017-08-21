@@ -45,10 +45,14 @@ describe('loans', () => {
 })
 
 describe('investInLoan', () => {
-  it('reduces the loan available amount, by the specified amount, on the specified loan (looked up by loan id)', () => {
+  it(`mutates the specified loan (looked up by loan id)
+      - reduces the loan available amount, by the specified amount
+      - marks the loan as invested`, () => {
     expect(loans[0].available).toEqual(11959)
+    expect(loans[0].isInvested).toBeUndefined()
     investInLoan('1', 1000)
     expect(loans[0].available).toEqual(10959)
+    expect(loans[0].isInvested).toBeTruthy()
   })
 
   it('throws developer-friendly exception if specific loan id not found', () => {

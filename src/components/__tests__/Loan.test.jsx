@@ -50,4 +50,18 @@ describe('<Loan />', () => {
     })
   })
 
+  describe('status indicator', () => {
+    it('renders, blank by default', () => {
+      const wrapper = shallow(<Loan loan={fakeLoan} onClickInvest={() => {}} />)
+      expect(wrapper.find('[data-test="status"]')).toHaveLength(1)
+      expect(wrapper.find('[data-test="status"] *')).toHaveLength(0)
+    })
+
+    it('renders message if isInvested of loan prop set', () => {
+      fakeLoan.isInvested = true
+      const wrapper = shallow(<Loan loan={fakeLoan} onClickInvest={() => {}} />)
+      expect(wrapper.find('[data-test="status"]').node.props.children.length).toBeGreaterThan(3)
+      expect(wrapper.find('[data-test="status"]')).toHaveLength(1)
+    })
+  })
 })
