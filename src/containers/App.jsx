@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { loans } from '../../data/current-loans.json'
+import { loans } from '../api-client/loans'
 import Loan from '../components/Loan'
 import TotalAvailable from '../components/TotalAvailable'
 import InvestDialog from '../components/InvestDialog'

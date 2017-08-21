@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme'
 
 import App from '../App'
 
-jest.mock('../../../data/current-loans.json', () => ({
+jest.mock('../../api-client/loans', () => ({
   loans: [{
       "id": "1",
       "title": "Voluptate et sed tempora qui quisquam.",
