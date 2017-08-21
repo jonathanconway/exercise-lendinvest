@@ -38,16 +38,16 @@ describe('<App />', () => {
       - one loan component per loan in the data-set
       - one total available component`, () => {
     const wrapper = shallow(<App />)
-    expect(wrapper.find('[data-test="title"]').length).toEqual(1)
-    expect(wrapper.find('Loan').length).toEqual(2)
-    expect(wrapper.find('TotalAvailable').length).toEqual(1)
+    expect(wrapper.find('[data-test="title"]')).toHaveLength(1)
+    expect(wrapper.find('Loan')).toHaveLength(2)
+    expect(wrapper.find('TotalAvailable')).toHaveLength(1)
   })
 
   it('shows invest dialog, when a loan is clicked, for that loan', () => {
     const wrapper = mount(<App />)
-    expect(wrapper.find('InvestDialog').length).toEqual(0)
+    expect(wrapper.find('InvestDialog')).toHaveLength(0)
     wrapper.find('Loan button').at(1).simulate('click', '1')
-    expect(wrapper.find('InvestDialog').length).toEqual(1)
+    expect(wrapper.find('InvestDialog')).toHaveLength(1)
     expect(wrapper.find('InvestDialog').prop('loan')).toEqual(expect.objectContaining({ id: '5' }))
   })
 

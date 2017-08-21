@@ -37,7 +37,7 @@ describe('<Loan />', () => {
     it('renders with text', () => {
       const wrapper = shallow(<Loan loan={fakeLoan} onClickInvest={() => {}} />)
       const button = wrapper.find('[data-test="invest"]')
-      expect(button.length).toEqual(1)
+      expect(button).toHaveLength(1)
       expect(button.text().length).toBeGreaterThan(5)
     })
 
