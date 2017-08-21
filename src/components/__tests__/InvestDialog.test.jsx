@@ -25,19 +25,19 @@ describe('<InvestDialog />', () => {
       - term term_remaining
       - investment amount form, containing
         - label
-        - input
+        - input (required)
         - submit button`, () => {
     const wrapper = shallow(<InvestDialog loan={fakeLoan} onSubmitInvestmentAmount={() => {}} />)
-    expect(wrapper.find('dialog').length).toEqual(1)
+    expect(wrapper.find('[data-test="invest-dialog"]')).toHaveLength(1)
     expect(wrapper.find('[data-test="title"]').text().length).toBeGreaterThan(5)
-    expect(wrapper.find('[data-test="loan-title"]').text()).toEqual('title')
-    expect(wrapper.find('[data-test="amount_available"]').text()).toEqual('£1,123')
-    expect(wrapper.find('[data-test="term_remaining"]').text()).toMatch('mockFormatTermRemaining-864000')
+    expect(wrapper.find('[data-test="loan-title"]').html()).toMatch('title')
+    expect(wrapper.find('[data-test="amount_available"]').html()).toMatch('£1,123')
+    expect(wrapper.find('[data-test="term_remaining"]').html()).toMatch('mockFormatTermRemaining-864000')
 
-    expect(wrapper.find('form').length).toEqual(1)
-    expect(wrapper.find('label[htmlFor="invest--investment-amount"]').length).toEqual(1)
-    expect(wrapper.find('input[type="number"]#invest--investment-amount').length).toEqual(1)
-    expect(wrapper.find('button[type="submit"]').length).toEqual(1)
+    expect(wrapper.find('[data-test="investment-amount-form"]')).toHaveLength(1)
+    expect(wrapper.find('[htmlFor="invest--investment-amount"]')).toHaveLength(1)
+    expect(wrapper.find('#invest--investment-amount[type="number"][required][autoFocus]')).toHaveLength(1)
+    expect(wrapper.find('[type="submit"]')).toHaveLength(1)
   })
 
   it('triggers onSubmitInvestmentAmount handler with form data when clicked', () => {

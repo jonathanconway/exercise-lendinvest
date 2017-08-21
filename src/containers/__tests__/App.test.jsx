@@ -34,9 +34,11 @@ describe('<App />', () => {
   })
 
   it(`renders
+      - title
       - one loan component per loan in the data-set
       - one total available component`, () => {
     const wrapper = shallow(<App />)
+    expect(wrapper.find('[data-test="title"]').length).toEqual(1)
     expect(wrapper.find('Loan').length).toEqual(2)
     expect(wrapper.find('TotalAvailable').length).toEqual(1)
   })

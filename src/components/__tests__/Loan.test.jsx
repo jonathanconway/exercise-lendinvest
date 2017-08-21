@@ -23,8 +23,8 @@ describe('<Loan />', () => {
   describe('loan details', () => {
     it('renders title, tranche and monetary figures, properly formatted', () => {
       const wrapper = shallow(<Loan loan={fakeLoan} onClickInvest={() => {}} />)
-      expect(wrapper.find('[data-test="title"]').text()).toMatch(fakeLoan.title)
-      expect(wrapper.find('[data-test="tranche"]').text()).toMatch(fakeLoan.tranche.toString())
+      expect(wrapper.find('[data-test="title"]').html()).toMatch(fakeLoan.title)
+      expect(wrapper.find('[data-test="tranche"]').html()).toMatch(fakeLoan.tranche.toString())
       expect(wrapper.find('[data-test="available"]').text()).toMatch('£1,123')
       expect(wrapper.find('[data-test="annualised_return"]').text()).toMatch('£1,456')
       expect(wrapper.find('[data-test="ltv"]').text()).toMatch('£42,341')
@@ -36,7 +36,7 @@ describe('<Loan />', () => {
   describe('invest button', () => {
     it('renders with text', () => {
       const wrapper = shallow(<Loan loan={fakeLoan} onClickInvest={() => {}} />)
-      const button = wrapper.find('button[data-test="invest"]')
+      const button = wrapper.find('[data-test="invest"]')
       expect(button.length).toEqual(1)
       expect(button.text().length).toBeGreaterThan(5)
     })
